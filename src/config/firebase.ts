@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, connectAuthEmulator } from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
 
 // Your web app's Firebase configuration
@@ -18,6 +18,12 @@ const app = initializeApp(firebaseConfig);
 
 // Initialize Firebase Authentication and get a reference to the service
 export const auth = getAuth(app);
+
+// Only connect to emulator in development
+if (process.env.NODE_ENV === 'development' && !auth.config.emulator) {
+  // Uncomment the line below if you want to use Firebase Auth emulator in development
+  // connectAuthEmulator(auth, "http://localhost:9099");
+}
 
 // Initialize Analytics (optional, can be used later)
 export const analytics = typeof window !== 'undefined' ? getAnalytics(app) : null;

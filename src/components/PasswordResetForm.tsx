@@ -33,7 +33,13 @@ export const PasswordResetForm: React.FC<PasswordResetFormProps> = ({ onBackToSi
     setLoading(true);
 
     try {
-      await sendPasswordResetEmail(auth, email);
+      // Configure action code settings for password reset
+      const actionCodeSettings = {
+        url: window.location.origin, // Redirect back to the app after reset
+        handleCodeInApp: false, // Handle the reset in the browser, not the app
+      };
+
+      await sendPasswordResetEmail(auth, email, actionCodeSettings);
       setSuccess(true);
       setEmail(''); // Clear form after successful send
     } catch (err: any) {
@@ -42,10 +48,14 @@ export const PasswordResetForm: React.FC<PasswordResetFormProps> = ({ onBackToSi
         setError('No account found with this email address');
       } else if (err.code === 'auth/invalid-email') {
         setError('Invalid email address');
+      } else if (err.code === 'auth/missing-email') {
+        setError('Please enter your email address');
+      } else if (err.code === 'auth/invalid-continue-uri') {
+        setError('Invalid configuration. Please contact support.');
       } else if (err.code === 'auth/too-many-requests') {
         setError('Too many reset attempts. Please try again later.');
       } else {
-        setError('Failed to send reset email. Please try again.');
+        setError(`Failed to send reset email: ${err.message}. Please try again or contact support.`);
       }
     } finally {
       setLoading(false);
