@@ -34,8 +34,6 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess, onSwitchToSig
   const serviceOptions = [
     'Recovery Sessions',
     'Private Sessions',
-    'Personal Training',
-    'Wellness Consultation',
     'Other'
   ];
 
