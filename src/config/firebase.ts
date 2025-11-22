@@ -4,13 +4,13 @@ import { getAnalytics } from "firebase/analytics";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBZiw3fReT0OTurVtkA5P6CTjsSBg-rJPk",
-  authDomain: "hqrecov.firebaseapp.com",
-  projectId: "hqrecov",
-  storageBucket: "hqrecov.firebasestorage.app",
-  messagingSenderId: "869255222828",
-  appId: "1:869255222828:web:4bcd71f05537907eee6389",
-  measurementId: "G-2XBEDMMJYX"
+  apiKey: "AIzaSyDSx2b4yqjDR-FlPaY-Pr3hevNe4K1eOmY",
+  authDomain: "hq-recovery-b9630.firebaseapp.com",
+  projectId: "hq-recovery-b9630",
+  storageBucket: "hq-recovery-b9630.firebasestorage.app",
+  messagingSenderId: "1078785407956",
+  appId: "1:1078785407956:web:360ae893c67e28885f3441",
+  measurementId: "G-SJ1KTZ867Q"
 };
 
 // Initialize Firebase
