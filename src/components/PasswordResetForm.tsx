@@ -84,6 +84,15 @@ export const PasswordResetForm: React.FC<PasswordResetFormProps> = ({ onBackToSi
             </div>
           </div>
 
+          {/* Info/Disclaimer */}
+          {!success && (
+            <div className="bg-blue-900/20 border border-blue-700/30 rounded-lg p-4">
+              <p className="text-blue-300 text-sm text-center">
+                📧 <strong>Important:</strong> If you don't see the reset email in your inbox, please check your <strong>spam</strong> or <strong>trash</strong> folder.
+              </p>
+            </div>
+          )}
+
           {/* Error Message */}
           {error && (
             <div className="bg-red-900/20 border border-red-700 rounded-lg p-4 flex items-start space-x-2">
