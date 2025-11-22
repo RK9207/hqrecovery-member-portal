@@ -6,9 +6,10 @@ import { auth } from '../config/firebase';
 interface SignInFormProps {
   onSuccess: () => void;
   onSwitchToSignUp: () => void;
+  onForgotPassword: () => void;
 }
 
-export const SignInForm: React.FC<SignInFormProps> = ({ onSuccess, onSwitchToSignUp }) => {
+export const SignInForm: React.FC<SignInFormProps> = ({ onSuccess, onSwitchToSignUp, onForgotPassword }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -86,9 +87,18 @@ export const SignInForm: React.FC<SignInFormProps> = ({ onSuccess, onSwitchToSig
 
           {/* Password */}
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-200 mb-2">
-              Password
-            </label>
+            <div className="flex items-center justify-between mb-2">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-200">
+                Password
+              </label>
+              <button
+                type="button"
+                onClick={onForgotPassword}
+                className="text-xs text-[#d8ba5b] hover:text-[#c9a852] transition-colors font-medium"
+              >
+                Forgot Password?
+              </button>
+            </div>
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
               <input
