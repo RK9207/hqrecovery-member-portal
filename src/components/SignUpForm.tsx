@@ -6,9 +6,11 @@ import { auth } from '../config/firebase';
 interface SignUpFormProps {
   onSuccess: () => void;
   onSwitchToSignIn: () => void;
+  onViewPrivacyPolicy: () => void;
+  onViewTerms: () => void;
 }
 
-export const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess, onSwitchToSignIn }) => {
+export const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess, onSwitchToSignIn, onViewPrivacyPolicy, onViewTerms }) => {
   const [formData, setFormData] = useState({
     fullName: '',
     phone: '',
@@ -413,9 +415,21 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess, onSwitchToSig
             </button>
           </p>
           <div className="text-xs text-gray-400">
-            <a href="#" className="hover:text-[#d8ba5b] transition-colors">Privacy Policy</a>
+            <button
+              type="button"
+              onClick={onViewPrivacyPolicy}
+              className="hover:text-[#d8ba5b] transition-colors"
+            >
+              Privacy Policy
+            </button>
             {' | '}
-            <a href="#" className="hover:text-[#d8ba5b] transition-colors">Terms of Service</a>
+            <button
+              type="button"
+              onClick={onViewTerms}
+              className="hover:text-[#d8ba5b] transition-colors"
+            >
+              Terms of Service
+            </button>
           </div>
         </div>
       </div>
