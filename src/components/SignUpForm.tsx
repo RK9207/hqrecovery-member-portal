@@ -283,15 +283,25 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess, onSwitchToSig
               {serviceOptions.map(service => (
                 <label
                   key={service}
-                  className="flex items-center space-x-3 bg-[#2a2520] border border-[#3a342f] rounded-lg p-3 cursor-pointer hover:border-[#d8ba5b] transition-colors"
+                  className={`flex items-center space-x-3 bg-[#2a2520] border-2 rounded-lg p-3 cursor-pointer transition-all duration-200 ${
+                    formData.services.includes(service)
+                      ? 'border-[#d8ba5b] bg-[#d8ba5b]/10'
+                      : 'border-[#3a342f] hover:border-[#d8ba5b]/50'
+                  }`}
                 >
-                  <input
-                    type="checkbox"
-                    checked={formData.services.includes(service)}
-                    onChange={() => handleServiceToggle(service)}
-                    className="w-4 h-4 text-[#d8ba5b] bg-[#231f1e] border-[#3a342f] rounded focus:ring-[#d8ba5b] focus:ring-2"
-                  />
-                  <span className="text-gray-200 text-sm">{service}</span>
+                  <div className="relative flex items-center justify-center">
+                    <input
+                      type="checkbox"
+                      checked={formData.services.includes(service)}
+                      onChange={() => handleServiceToggle(service)}
+                      className="w-5 h-5 rounded border-2 border-[#3a342f] bg-[#231f1e] cursor-pointer
+                                 checked:bg-[#d8ba5b] checked:border-[#d8ba5b]
+                                 focus:ring-2 focus:ring-[#d8ba5b] focus:ring-offset-0 focus:ring-offset-[#2a2520]
+                                 transition-all duration-200"
+                      style={{ accentColor: '#d8ba5b' }}
+                    />
+                  </div>
+                  <span className="text-gray-200 text-sm font-medium">{service}</span>
                 </label>
               ))}
             </div>
@@ -319,27 +329,43 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess, onSwitchToSig
               Have you visited our facility before?
             </label>
             <div className="flex space-x-4">
-              <label className="flex items-center space-x-2 bg-[#2a2520] border border-[#3a342f] rounded-lg p-3 cursor-pointer hover:border-[#d8ba5b] transition-colors flex-1">
+              <label className={`flex items-center justify-center space-x-3 bg-[#2a2520] border-2 rounded-lg p-3 cursor-pointer transition-all duration-200 flex-1 ${
+                formData.visitedBefore === 'Yes'
+                  ? 'border-[#d8ba5b] bg-[#d8ba5b]/10'
+                  : 'border-[#3a342f] hover:border-[#d8ba5b]/50'
+              }`}>
                 <input
                   type="radio"
                   name="visitedBefore"
                   value="Yes"
                   checked={formData.visitedBefore === 'Yes'}
                   onChange={() => handleRadioChange('Yes')}
-                  className="w-4 h-4 text-[#d8ba5b] bg-[#231f1e] border-[#3a342f] focus:ring-[#d8ba5b] focus:ring-2"
+                  className="w-5 h-5 border-2 border-[#3a342f] bg-[#231f1e] cursor-pointer
+                             checked:bg-[#d8ba5b] checked:border-[#d8ba5b]
+                             focus:ring-2 focus:ring-[#d8ba5b] focus:ring-offset-0 focus:ring-offset-[#2a2520]
+                             transition-all duration-200"
+                  style={{ accentColor: '#d8ba5b' }}
                 />
-                <span className="text-gray-200">Yes</span>
+                <span className="text-gray-200 font-medium">Yes</span>
               </label>
-              <label className="flex items-center space-x-2 bg-[#2a2520] border border-[#3a342f] rounded-lg p-3 cursor-pointer hover:border-[#d8ba5b] transition-colors flex-1">
+              <label className={`flex items-center justify-center space-x-3 bg-[#2a2520] border-2 rounded-lg p-3 cursor-pointer transition-all duration-200 flex-1 ${
+                formData.visitedBefore === 'No'
+                  ? 'border-[#d8ba5b] bg-[#d8ba5b]/10'
+                  : 'border-[#3a342f] hover:border-[#d8ba5b]/50'
+              }`}>
                 <input
                   type="radio"
                   name="visitedBefore"
                   value="No"
                   checked={formData.visitedBefore === 'No'}
                   onChange={() => handleRadioChange('No')}
-                  className="w-4 h-4 text-[#d8ba5b] bg-[#231f1e] border-[#3a342f] focus:ring-[#d8ba5b] focus:ring-2"
+                  className="w-5 h-5 border-2 border-[#3a342f] bg-[#231f1e] cursor-pointer
+                             checked:bg-[#d8ba5b] checked:border-[#d8ba5b]
+                             focus:ring-2 focus:ring-[#d8ba5b] focus:ring-offset-0 focus:ring-offset-[#2a2520]
+                             transition-all duration-200"
+                  style={{ accentColor: '#d8ba5b' }}
                 />
-                <span className="text-gray-200">No</span>
+                <span className="text-gray-200 font-medium">No</span>
               </label>
             </div>
           </div>
@@ -361,18 +387,28 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess, onSwitchToSig
           </div>
 
           {/* Acknowledgement */}
-          <div className="bg-[#2a2520] border border-[#3a342f] rounded-lg p-4">
-            <label className="flex items-start space-x-3 cursor-pointer">
-              <input
-                type="checkbox"
-                name="acknowledgement"
-                checked={formData.acknowledgement}
-                onChange={handleInputChange}
-                className="w-5 h-5 mt-0.5 text-[#d8ba5b] bg-[#231f1e] border-[#3a342f] rounded focus:ring-[#d8ba5b] focus:ring-2 flex-shrink-0"
-                required
-              />
+          <div className={`bg-[#2a2520] border-2 rounded-lg p-5 transition-all duration-200 ${
+            formData.acknowledgement
+              ? 'border-[#d8ba5b] bg-[#d8ba5b]/5'
+              : 'border-[#3a342f]'
+          }`}>
+            <label className="flex items-start space-x-3 cursor-pointer group">
+              <div className="relative flex items-center justify-center mt-0.5">
+                <input
+                  type="checkbox"
+                  name="acknowledgement"
+                  checked={formData.acknowledgement}
+                  onChange={handleInputChange}
+                  className="w-6 h-6 rounded border-2 border-[#3a342f] bg-[#231f1e] cursor-pointer
+                             checked:bg-[#d8ba5b] checked:border-[#d8ba5b]
+                             focus:ring-2 focus:ring-[#d8ba5b] focus:ring-offset-2 focus:ring-offset-[#2a2520]
+                             transition-all duration-200 flex-shrink-0"
+                  style={{ accentColor: '#d8ba5b' }}
+                  required
+                />
+              </div>
               <span className="text-gray-300 text-sm leading-relaxed">
-                <span className="text-red-400">*</span> I acknowledge that I am voluntarily participating in recovery and wellness services at HQ Recovery. I confirm that I am in good health to the best of my knowledge, and I understand it is my responsibility to consult with a healthcare provider if I have any existing medical conditions or concerns. I agree to follow all protocols and safety guidelines provided by HQ Recovery and accept full responsibility for my personal health and well-being during each session.
+                <span className="text-red-400 font-bold">*</span> I acknowledge that I am voluntarily participating in recovery and wellness services at HQ Recovery. I confirm that I am in good health to the best of my knowledge, and I understand it is my responsibility to consult with a healthcare provider if I have any existing medical conditions or concerns. I agree to follow all protocols and safety guidelines provided by HQ Recovery and accept full responsibility for my personal health and well-being during each session.
               </span>
             </label>
           </div>
