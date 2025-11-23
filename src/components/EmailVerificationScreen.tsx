@@ -60,7 +60,8 @@ export const EmailVerificationScreen: React.FC<EmailVerificationScreenProps> = (
       if (auth.currentUser.emailVerified) {
         setSuccess('Email verified successfully! Redirecting...');
         setTimeout(() => {
-          onVerificationComplete();
+          // Force a page reload to trigger the auth state change
+          window.location.reload();
         }, 1500);
       } else {
         setError('Email not yet verified. Please check your email and click the verification link.');

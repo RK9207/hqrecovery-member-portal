@@ -17,6 +17,7 @@ function App() {
   // Listen to Firebase auth state changes
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
+      console.log('Auth state changed:', user?.email, 'verified:', user?.emailVerified);
       setFirebaseUser(user);
       setAuthLoading(false);
     });

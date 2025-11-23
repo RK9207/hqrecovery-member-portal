@@ -22,7 +22,9 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthSuccess }) => {
   };
 
   const handleVerificationComplete = () => {
-    onAuthSuccess();
+    // The auth state change will be handled by App.tsx
+    // Just force a reload to ensure fresh auth state
+    window.location.reload();
   };
   const renderView = () => {
     switch (currentView) {
