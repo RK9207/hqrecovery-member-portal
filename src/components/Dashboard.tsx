@@ -159,31 +159,13 @@ export const Dashboard: React.FC<DashboardProps> = ({ userData, loading, onRefre
           </div>
 
           {/* Session Balances */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <SessionBalance
               title="Tokens"
               balance={userData?.recoveryBalance || 0}
               icon={Zap}
               loading={loading}
             />
-            <div className="bg-[#231f1e] rounded-xl p-6 border border-[#3a342f] relative shadow-lg">
-              <div className="flex items-center justify-between mb-4">
-                <div className="p-2 bg-[#2a2520] rounded-lg border border-[#3a342f]">
-                  <Calendar className="w-5 h-5 text-gray-400" />
-                </div>
-                <span className="text-2xl font-bold text-gray-500">-</span>
-              </div>
-              
-              <h3 className="text-lg font-semibold text-white mb-3">PT Sessions</h3>
-              
-              <div className="w-full bg-[#2a2520] rounded-full h-2 mb-3">
-                <div className="bg-gray-600 h-2 rounded-full w-0"></div>
-              </div>
-              
-              <p className="text-sm text-gray-400">
-                We are currently not accepting any personal training sessions.
-              </p>
-            </div>
             <SessionBalance
               title="Private Sessions"
               balance={userData?.teamBalance || 0}
