@@ -150,14 +150,10 @@ export const Profile: React.FC<ProfileProps> = ({ userData, loading }) => {
 
           <div className="bg-[#231f1e] rounded-xl p-6 border border-[#3a342f] shadow-lg">
             <h2 className="text-lg font-semibold text-white mb-4">Account Summary</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="bg-[#2a2520] rounded-lg p-4 border border-[#3a342f]">
                 <h3 className="font-medium text-gray-200 mb-1">Total Sessions Attended</h3>
                 <p className="text-2xl font-bold text-white">{userData?.totalSessionsAttended || 0}</p>
-              </div>
-              <div className="bg-[#2a2520] rounded-lg p-4 border border-[#3a342f]">
-                <h3 className="font-medium text-gray-200 mb-1">Member Since</h3>
-                <p className="text-lg font-semibold text-white">{formatJoiningDate(userData?.joiningDate || '')}</p>
               </div>
               <div className="bg-[#2a2520] rounded-lg p-4 border border-[#3a342f]">
                 <h3 className="font-medium text-gray-200 mb-1">Last Visit</h3>
