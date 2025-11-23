@@ -97,8 +97,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ userData, loading, onRefre
 
           {/* Membership Status */}
           <div className="bg-[#231f1e] rounded-xl p-6 border border-[#3a342f] shadow-lg">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="flex items-center space-x-3 mb-2 sm:mb-0">
                 <div className="bg-[#2a2520] rounded-lg p-2 border border-[#3a342f]">
                   <Shield className="w-5 h-5 text-gray-300" />
                 </div>
@@ -107,7 +107,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ userData, loading, onRefre
                   <p className="text-gray-300 text-sm">Your current membership level</p>
                 </div>
               </div>
-              <div className={`px-4 py-2 rounded-lg border font-semibold flex items-center space-x-2 ${getMembershipStatusColor(userData?.membershipStatus || 'None')}`}>
+              <div className={`px-4 py-2 rounded-lg border font-semibold flex items-center space-x-2 w-full sm:w-auto justify-center sm:justify-start ${getMembershipStatusColor(userData?.membershipStatus || 'None')}`}>
                 <span className="text-lg">{getMembershipStatusIcon(userData?.membershipStatus || 'None')}</span>
                 <span className="capitalize">{userData?.membershipStatus || 'None'}</span>
               </div>
