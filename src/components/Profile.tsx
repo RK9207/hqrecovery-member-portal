@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, Mail, Phone, Edit3, Check, X } from 'lucide-react';
+import { User, Mail, Phone, CreditCard as Edit3, Check, X } from 'lucide-react';
 import { UserData } from '../types';
 import { parseDDMMYYYY } from '../formatDate';
 
