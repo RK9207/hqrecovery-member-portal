@@ -134,7 +134,8 @@ export const useGoogleSheets = (userEmail?: string) => {
       setNotifications(transformedNotifications);
       setSessions(transformedSessions);
     } catch (err) {
-      setError('Failed to load user data. Please check your internet connection and try again.');
+      const errorMessage = err instanceof Error ? err.message : 'Failed to load user data. Please check your internet connection and try again.';
+      setError(errorMessage);
       console.error('Error fetching user data:', err);
     } finally {
       setLoading(false);

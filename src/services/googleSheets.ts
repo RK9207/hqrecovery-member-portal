@@ -50,7 +50,7 @@ export class GoogleSheetsService {
     try {
       const response = await fetch(this.getMemberDataUrl());
       if (!response.ok) {
-        throw new Error('Failed to fetch data from Google Sheets');
+        throw new Error(`Failed to fetch data from Google Sheets. Status: ${response.status}. Please ensure the Google Sheet is published to the web.`);
       }
 
       const text = await response.text();
@@ -88,6 +88,9 @@ export class GoogleSheetsService {
         joiningDate: cells[7]?.f || String(cells[7]?.v || ''), // Column H: Joining Date (formatted)
       };
     } catch (error) {
+      if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+        throw new Error('Unable to connect to Google Sheets. Please check your internet connection and ensure the Google Sheet is published to the web.');
+      }
       console.error('Error fetching user data:', error);
       throw error;
     }
