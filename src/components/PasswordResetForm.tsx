@@ -31,6 +31,11 @@ export const PasswordResetForm: React.FC<PasswordResetFormProps> = ({ onBackToSi
     }
 
     setLoading(true);
+    
+    // Log attempt for debugging
+    console.log('🔄 Attempting password reset for email:', email);
+    console.log('🔧 Firebase Auth instance:', auth);
+    console.log('🌐 Current domain:', window.location.origin);
 
     try {
       // Configure action code settings for password reset
@@ -39,24 +44,48 @@ export const PasswordResetForm: React.FC<PasswordResetFormProps> = ({ onBackToSi
         handleCodeInApp: false, // Handle the reset in the browser, not the app
       };
 
+      console.log('📧 Sending password reset email with settings:', actionCodeSettings);
+      
       await sendPasswordResetEmail(auth, email, actionCodeSettings);
+      
+      console.log('✅ Password reset email sent successfully');
       setSuccess(true);
       setEmail(''); // Clear form after successful send
     } catch (err: any) {
-      console.error('Password reset error:', err);
+      // Detailed error logging
+      console.error('❌ Password reset error details:');
+      console.error('Error code:', err.code);
+      console.error('Error message:', err.message);
+      console.error('Full error object:', err);
+      
+      // Log Firebase Auth state
+      console.log('🔍 Firebase Auth current user:', auth.currentUser);
+      console.log('🔍 Firebase Auth app:', auth.app);
+      
       if (err.code === 'auth/user-not-found') {
-        setError('No account found with this email address');
+        setError('No account found with this email address. Please check the email or sign up for a new account.');
       } else if (err.code === 'auth/invalid-email') {
         setError('Invalid email address');
       } else if (err.code === 'auth/missing-email') {
         setError('Please enter your email address');
       } else if (err.code === 'auth/invalid-continue-uri') {
-        setError('Invalid configuration. Please contact support.');
+        setError('Configuration error. Please contact support with error code: invalid-continue-uri');
       } else if (err.code === 'auth/too-many-requests') {
         setError('Too many reset attempts. Please try again later.');
+      } else if (err.code === 'auth/unauthorized-continue-uri') {
+        setError('Domain not authorized. Please contact support with error code: unauthorized-continue-uri');
+      } else if (err.code === 'auth/invalid-action-code') {
+        setError('Invalid action code. Please contact support.');
       } else {
-        setError(`Failed to send reset email: ${err.message}. Please try again or contact support.`);
+        setError(`Failed to send reset email. Error: ${err.code || 'unknown'}. Please contact support if this persists.`);
       }
+      
+      // Additional debugging info in console
+      console.log('🔧 Debugging info:');
+      console.log('- Email entered:', email);
+      console.log('- Current URL:', window.location.href);
+      console.log('- Firebase project ID:', auth.app.options.projectId);
+      console.log('- Firebase API key:', auth.app.options.apiKey ? 'Present' : 'Missing');
     } finally {
       setLoading(false);
     }
@@ -98,7 +127,18 @@ export const PasswordResetForm: React.FC<PasswordResetFormProps> = ({ onBackToSi
           {!success && (
             <div className="bg-blue-900/20 border border-blue-700/30 rounded-lg p-4">
               <p className="text-blue-300 text-sm text-center">
-                📧 <strong>Important:</strong> If you don't see the reset email in your inbox, please check your <strong>spam</strong> or <strong>trash</strong> folder.
+                📧 <strong>Important:</strong> If you don't see the reset email in your inbox, please check your <strong>spam</strong> or <strong>trash</strong> folder. Reset emails can take up to 5 minutes to arrive.
+              </p>
+            </div>
+          )}
+
+          {/* Debug Info (only in development) */}
+          {process.env.NODE_ENV === 'development' && (
+            <div className="bg-gray-900/20 border border-gray-700/30 rounded-lg p-4">
+              <p className="text-gray-300 text-xs">
+                <strong>Debug Info:</strong><br/>
+                Domain: {window.location.origin}<br/>
+                Firebase Project: {auth.app.options.projectId}
               </p>
             </div>
           )}
