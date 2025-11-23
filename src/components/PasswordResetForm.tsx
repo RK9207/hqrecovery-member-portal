@@ -127,7 +127,7 @@ export const PasswordResetForm: React.FC<PasswordResetFormProps> = ({ onBackToSi
           {!success && (
             <div className="bg-blue-900/20 border border-blue-700/30 rounded-lg p-4">
               <p className="text-blue-300 text-sm text-center">
-                📧 <strong>Important:</strong> If you don't see the reset email in your inbox, please check your <strong>spam</strong> or <strong>trash</strong> folder. Reset emails can take up to 5 minutes to arrive.
+                📧 <strong>Important:</strong> Reset emails are sent from Firebase and may take up to 10 minutes to arrive. Please check your <strong>spam/junk folder</strong> thoroughly, as automated emails are often filtered there.
               </p>
             </div>
           )}
@@ -160,7 +160,11 @@ export const PasswordResetForm: React.FC<PasswordResetFormProps> = ({ onBackToSi
                   Password reset email sent!
                 </p>
                 <p className="text-green-300 text-sm">
-                  Check your inbox and spam folder for the reset link.
+                  <strong>Next steps:</strong><br/>
+                  1. Check your <strong>inbox</strong> (may take up to 10 minutes)<br/>
+                  2. Check your <strong>spam/junk folder</strong> thoroughly<br/>
+                  3. Check your <strong>trash/deleted items</strong><br/>
+                  4. Look for an email from <strong>noreply@hq-recovery-b9630.firebaseapp.com</strong>
                 </p>
               </div>
             </div>
@@ -189,18 +193,35 @@ export const PasswordResetForm: React.FC<PasswordResetFormProps> = ({ onBackToSi
 
         {success && (
           <div className="mt-4 text-center">
-            <p className="text-xs text-gray-400">
-              Didn't receive the email?{' '}
-              <button
-                onClick={() => {
-                  setSuccess(false);
-                  setError('');
-                }}
-                className="text-[#d8ba5b] hover:text-[#c9a852] transition-colors"
-              >
-                Try again
-              </button>
-            </p>
+            <div className="space-y-3">
+              <div className="bg-yellow-900/20 border border-yellow-700/30 rounded-lg p-3">
+                <p className="text-yellow-300 text-xs">
+                  <strong>Still don't see the email?</strong><br/>
+                  • Wait up to 10 minutes for delivery<br/>
+                  • Search your entire email for "password reset"<br/>
+                  • Check if your email provider blocks automated emails<br/>
+                  • Try a different email address if available
+                </p>
+              </div>
+              <p className="text-xs text-gray-400">
+                <button
+                  onClick={() => {
+                    setSuccess(false);
+                    setError('');
+                  }}
+                  className="text-[#d8ba5b] hover:text-[#c9a852] transition-colors"
+                >
+                  Try sending again
+                </button>
+                {' | '}
+                <a 
+                  href="mailto:team@hqrecovery.com?subject=Password Reset Help&body=I'm having trouble receiving password reset emails for my account."
+                  className="text-[#d8ba5b] hover:text-[#c9a852] transition-colors"
+                >
+                  Contact support
+                </a>
+              </p>
+            </div>
           </div>
         )}
       </div>
