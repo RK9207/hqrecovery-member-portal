@@ -161,7 +161,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ userData, loading, onRefre
           {/* Session Balances */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <SessionBalance
-              title="Recovery Sessions"
+              title="Tokens"
               balance={userData?.recoveryBalance || 0}
               icon={Zap}
               loading={loading}
@@ -185,7 +185,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ userData, loading, onRefre
               </p>
             </div>
             <SessionBalance
-              title="Team Sessions"
+              title="Private Sessions"
               balance={userData?.teamBalance || 0}
               icon={CreditCard}
               loading={loading}

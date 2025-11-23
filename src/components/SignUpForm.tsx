@@ -32,7 +32,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess, onSwitchToSig
   const [showHealthModal, setShowHealthModal] = useState(false);
 
   const serviceOptions = [
-    'Recovery Sessions',
+    'Tokens',
     'Private Sessions',
     'Other'
   ];
