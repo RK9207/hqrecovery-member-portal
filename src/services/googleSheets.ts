@@ -83,7 +83,7 @@ export class GoogleSheetsService {
         email: cells[2]?.v || '', // Column C: Email
         recoveryBalance: parseInt(cells[3]?.v) || 0, // Column D: Recovery Sessions
         ptBalance: parseInt(cells[4]?.v) || 0, // Column E: PT Sessions
-        teamBalance: parseInt(cells[5]?.v) || 0, // Column F: Team Sessions
+        teamBalance: parseInt(cells[5]?.v) || 0, // Column F: Private Sessions
         membershipStatus: cells[6]?.v || 'None', // Column G: Membership Status
         joiningDate: cells[7]?.f || String(cells[7]?.v || ''), // Column H: Joining Date (formatted)
       };

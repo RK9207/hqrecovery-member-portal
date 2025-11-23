@@ -189,7 +189,7 @@ export const Sessions: React.FC<SessionsProps> = ({ userData, loading }) => {
                                       </div>
                                       <div>
                                         <h4 className="text-base sm:text-lg font-semibold text-white">
-                                          {session.serviceType || 'Recovery Session'}
+                                          {session.serviceType || 'Token Session'}
                                         </h4>
                                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(session.status || 'pending')}`}>
                                           {session.status?.toLowerCase() === 'attended' ? 'Showed' : 
@@ -255,7 +255,7 @@ export const Sessions: React.FC<SessionsProps> = ({ userData, loading }) => {
                                     <div className="flex items-center justify-between">
                                       <div>
                                         <h4 className="font-semibold text-gray-200 text-sm sm:text-base">
-                                          {session.serviceType || 'Recovery Session'}
+                                          {session.serviceType || 'Token Session'}
                                         </h4>
                                         <p className="text-xs sm:text-sm text-[#d8ba5b] font-semibold">{formatDateWithOrdinalAndTime(session.date, session.time)}</p>
                                       </div>
