@@ -132,17 +132,6 @@ export const PasswordResetForm: React.FC<PasswordResetFormProps> = ({ onBackToSi
             </div>
           )}
 
-          {/* Debug Info (only in development) */}
-          {process.env.NODE_ENV === 'development' && (
-            <div className="bg-gray-900/20 border border-gray-700/30 rounded-lg p-4">
-              <p className="text-gray-300 text-xs">
-                <strong>Debug Info:</strong><br/>
-                Domain: {window.location.origin}<br/>
-                Firebase Project: {auth.app.options.projectId}
-              </p>
-            </div>
-          )}
-
           {/* Error Message */}
           {error && (
             <div className="bg-red-900/20 border border-red-700 rounded-lg p-4 flex items-start space-x-2">
