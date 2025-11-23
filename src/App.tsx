@@ -54,6 +54,11 @@ function App() {
     return <AuthScreen onAuthSuccess={() => {}} />;
   }
 
+  // Show auth screen if email is not verified
+  if (!firebaseUser.emailVerified) {
+    return <AuthScreen onAuthSuccess={() => {}} />;
+  }
+
   const renderContent = () => {
     switch (activeTab) {
       case 'dashboard':

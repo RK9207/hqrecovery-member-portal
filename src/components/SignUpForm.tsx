@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { User, Phone, Mail, Lock, CheckCircle, AlertCircle } from 'lucide-react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import { auth } from '../config/firebase';
 import { HealthCommitmentModal } from './HealthCommitmentModal';
 
 interface SignUpFormProps {
   onSuccess: () => void;
+  onEmailVerificationRequired: (email: string) => void;
   onSwitchToSignIn: () => void;
   onViewPrivacyPolicy: () => void;
   onViewTerms: () => void;
 }
 
-export const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess, onSwitchToSignIn, onViewPrivacyPolicy, onViewTerms }) => {
+export const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess, onEmailVerificationRequired, onSwitchToSignIn, onViewPrivacyPolicy, onViewTerms }) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -129,7 +130,10 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess, onSwitchToSig
         formData.password
       );
 
-      // Step 2: Send data to webhook (excluding password)
+      // Step 2: Send email verification
+      await sendEmailVerification(userCredential.user);
+
+      // Step 3: Send data to webhook (excluding password)
       const webhookData = {
         firstName: formData.firstName,
         lastName: formData.lastName,
@@ -159,10 +163,10 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess, onSwitchToSig
         console.error('Webhook failed, but user account created');
       }
 
-      setSuccess('Account created successfully! Redirecting...');
+      setSuccess('Account created successfully! Please check your email to verify your account.');
       setTimeout(() => {
-        onSuccess();
-      }, 1500);
+        onEmailVerificationRequired(formData.email);
+      }, 2000);
 
     } catch (err: any) {
       console.error('Signup error:', err);
@@ -172,8 +176,10 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess, onSwitchToSig
         setError('Invalid email address');
       } else if (err.code === 'auth/weak-password') {
         setError('Password is too weak. Please use at least 6 characters.');
+      } else if (err.code === 'auth/network-request-failed') {
+        setError('Network error. Please check your internet connection and try again.');
       } else {
-        setError('An error occurred during sign up. Please try again.');
+        setError(`An error occurred during sign up: ${err.message}. Please try again.`);
       }
     } finally {
       setLoading(false);

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { SignInForm } from './SignInForm';
 import { SignUpForm } from './SignUpForm';
 import { PasswordResetForm } from './PasswordResetForm';
+import { EmailVerificationScreen } from './EmailVerificationScreen';
 import { PrivacyPolicy } from './PrivacyPolicy';
 import { TermsAndConditions } from './TermsAndConditions';
 
@@ -9,17 +10,27 @@ interface AuthScreenProps {
   onAuthSuccess: () => void;
 }
 
-type AuthView = 'signin' | 'signup' | 'reset' | 'privacy' | 'terms';
+type AuthView = 'signin' | 'signup' | 'reset' | 'email-verification' | 'privacy' | 'terms';
 
 export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthSuccess }) => {
   const [currentView, setCurrentView] = useState<AuthView>('signin');
+  const [pendingVerificationEmail, setPendingVerificationEmail] = useState<string>('');
 
+  const handleEmailVerificationRequired = (email: string) => {
+    setPendingVerificationEmail(email);
+    setCurrentView('email-verification');
+  };
+
+  const handleVerificationComplete = () => {
+    onAuthSuccess();
+  };
   const renderView = () => {
     switch (currentView) {
       case 'signup':
         return (
           <SignUpForm
             onSuccess={onAuthSuccess}
+            onEmailVerificationRequired={handleEmailVerificationRequired}
             onSwitchToSignIn={() => setCurrentView('signin')}
             onViewPrivacyPolicy={() => setCurrentView('privacy')}
             onViewTerms={() => setCurrentView('terms')}
@@ -28,6 +39,14 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthSuccess }) => {
       case 'reset':
         return (
           <PasswordResetForm
+            onBackToSignIn={() => setCurrentView('signin')}
+          />
+        );
+      case 'email-verification':
+        return (
+          <EmailVerificationScreen
+            userEmail={pendingVerificationEmail}
+            onVerificationComplete={handleVerificationComplete}
             onBackToSignIn={() => setCurrentView('signin')}
           />
         );
