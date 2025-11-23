@@ -127,7 +127,7 @@ export const PasswordResetForm: React.FC<PasswordResetFormProps> = ({ onBackToSi
           {!success && (
             <div className="bg-blue-900/20 border border-blue-700/30 rounded-lg p-4">
               <p className="text-blue-300 text-sm text-center">
-                📧 <strong>Important:</strong> Reset emails are sent from Firebase and may take up to 10 minutes to arrive. Please check your <strong>spam/junk folder</strong> thoroughly, as automated emails are often filtered there.
+                📧 <strong>Important:</strong> If you don't see the reset email in your inbox, please check your <strong>spam/junk folder</strong> and <strong>trash folder</strong> as automated emails are often filtered there.
               </p>
             </div>
           )}
