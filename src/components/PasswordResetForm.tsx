@@ -38,15 +38,9 @@ export const PasswordResetForm: React.FC<PasswordResetFormProps> = ({ onBackToSi
     console.log('🌐 Current domain:', window.location.origin);
 
     try {
-      // Configure action code settings for password reset
-      const actionCodeSettings = {
-        url: window.location.origin, // Redirect back to the app after reset
-        handleCodeInApp: false, // Handle the reset in the browser, not the app
-      };
-
-      console.log('📧 Sending password reset email with settings:', actionCodeSettings);
+      console.log('📧 Sending password reset email');
       
-      await sendPasswordResetEmail(auth, email, actionCodeSettings);
+      await sendPasswordResetEmail(auth, email);
       
       console.log('✅ Password reset email sent successfully');
       setSuccess(true);
