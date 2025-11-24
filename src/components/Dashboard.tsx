@@ -175,7 +175,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ userData, loading, onRefre
           </div>
 
           {/* Quick Actions */}
-          <QuickActions />
+          <QuickActions userData={userData} />
 
           {/* Latest Notifications & Updates */}
           {notifications && notifications.filter(n => n.isActive !== false).length > 0 && (
