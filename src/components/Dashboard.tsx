@@ -154,7 +154,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ userData, loading, onRefre
           {/* Update Instructions */}
           <div className="bg-blue-900/20 border border-blue-700/30 rounded-xl p-4">
             <p className="text-blue-300 text-center font-medium">
-              ⏱️ After booking or purchasing sessions, please wait 1-2 minutes before seeing updates in the dashboard.
+              ⏱️ After booking or purchasing sessions, please wait 1-2 minutes then refresh to see updates in the dashboard.
             </p>
           </div>
 
