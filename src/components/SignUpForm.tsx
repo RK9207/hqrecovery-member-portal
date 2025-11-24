@@ -135,12 +135,17 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess, onEmailVerifi
       // Step 2: Send email verification
       await sendEmailVerification(userCredential.user);
 
-      // Step 3: Send data to webhook (excluding password)
+      // Step 3: Process phone number - remove +353 if present
+      const processedPhone = formData.phone.startsWith('+353') 
+        ? formData.phone.substring(4) // Remove '+353' prefix
+        : formData.phone;
+
+      // Step 4: Send data to webhook (excluding password)
       const webhookData = {
         firstName: formData.firstName,
         lastName: formData.lastName,
         fullName: `${formData.firstName} ${formData.lastName}`.trim(),
-        phone: formData.phone,
+        phone: processedPhone,
         email: formData.email,
         services: formData.services.join(', '),
         referralSource: formData.referralSource,
