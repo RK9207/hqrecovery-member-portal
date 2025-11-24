@@ -251,7 +251,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess, onEmailVerifi
                 value={formData.phone}
                 onChange={handleInputChange}
                 className="w-full pl-10 pr-4 py-3 border border-[#3a342f] rounded-lg focus:ring-2 focus:ring-[#d8ba5b] focus:border-[#d8ba5b] transition-colors text-white placeholder-gray-400 bg-[#2a2520]"
-                placeholder="Your Phone Number (Whatsapp-Linked)"
+                placeholder="Your Phone Number (Without irish country code)"
                 required
               />
             </div>
