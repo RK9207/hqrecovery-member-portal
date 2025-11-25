@@ -11,6 +11,7 @@ interface QuickActionsProps {
 export const QuickActions: React.FC<QuickActionsProps> = ({ userData }) => {
   const [showTokenError, setShowTokenError] = React.useState(false);
   const [showCancelMessage, setShowCancelMessage] = React.useState(false);
+  const [showSupportMessage, setShowSupportMessage] = React.useState(false);
 
   const handleAvailabilityCheck = (e: React.MouseEvent) => {
     const recoveryBalance = userData?.recoveryBalance || 0;
@@ -25,6 +26,12 @@ export const QuickActions: React.FC<QuickActionsProps> = ({ userData }) => {
     
     // If user has tokens, proceed with normal availability check
     window.open('https://api.leadconnectorhq.com/widget/booking/wBVwTDYR3QnwAR20GNYC', '_blank');
+  };
+
+  const handleContactSupport = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowSupportMessage(true);
+    setTimeout(() => setShowSupportMessage(false), 8000); // Hide after 8 seconds
   };
 
   const handleCancelSession = (e: React.MouseEvent) => {
@@ -67,7 +74,8 @@ export const QuickActions: React.FC<QuickActionsProps> = ({ userData }) => {
       title: 'Contact Support',
       description: 'Get help from our team',
       icon: Phone,
-      link: 'https://link.apisystem.tech/widget/survey/eyJsJkseRgLR5Cl5GHqe',
+      link: '#',
+      onClick: handleContactSupport,
       primary: false
     }
   ];
@@ -90,6 +98,15 @@ export const QuickActions: React.FC<QuickActionsProps> = ({ userData }) => {
         <div className="bg-blue-900/20 border border-blue-700 rounded-xl p-4 mb-6 animate-pulse">
           <p className="text-blue-300 text-center font-medium">
             📞 <strong>Please call us at +353 838203627 or email us at team@hqrecovery.com to cancel session</strong>
+          </p>
+        </div>
+      )}
+      
+      {/* Contact Support Message */}
+      {showSupportMessage && (
+        <div className="bg-blue-900/20 border border-blue-700 rounded-xl p-4 mb-6 animate-pulse">
+          <p className="text-blue-300 text-center font-medium">
+            📞 <strong>Please call us at +353 838203627 or email us at team@hqrecovery.com for support</strong>
           </p>
         </div>
       )}
