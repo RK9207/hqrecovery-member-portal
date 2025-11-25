@@ -10,6 +10,7 @@ interface QuickActionsProps {
 
 export const QuickActions: React.FC<QuickActionsProps> = ({ userData }) => {
   const [showTokenError, setShowTokenError] = React.useState(false);
+  const [showCancelMessage, setShowCancelMessage] = React.useState(false);
 
   const handleAvailabilityCheck = (e: React.MouseEvent) => {
     const recoveryBalance = userData?.recoveryBalance || 0;
@@ -26,12 +27,18 @@ export const QuickActions: React.FC<QuickActionsProps> = ({ userData }) => {
     window.open('https://api.leadconnectorhq.com/widget/booking/wBVwTDYR3QnwAR20GNYC', '_blank');
   };
 
+  const handleCancelSession = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowCancelMessage(true);
+    setTimeout(() => setShowCancelMessage(false), 8000); // Hide after 8 seconds
+  };
   const actions = [
     {
       title: 'Cancel Session',
       description: 'Cancel your current booking',
       icon: Calendar,
-      link: 'https://link.apisystem.tech/widget/survey/BclWcIH3io6poSqZnHSG',
+      link: '#',
+      onClick: handleCancelSession,
       primary: false
     },
     {
@@ -74,6 +81,15 @@ export const QuickActions: React.FC<QuickActionsProps> = ({ userData }) => {
         <div className="bg-red-900/20 border border-red-700 rounded-xl p-4 mb-6 animate-pulse">
           <p className="text-red-300 text-center font-medium">
             ❌ <strong>You need to have tokens to check availability.</strong> Please purchase sessions first.
+          </p>
+        </div>
+      )}
+      
+      {/* Cancel Session Message */}
+      {showCancelMessage && (
+        <div className="bg-blue-900/20 border border-blue-700 rounded-xl p-4 mb-6 animate-pulse">
+          <p className="text-blue-300 text-center font-medium">
+            📞 <strong>Please call us at +353 838203627 or email us at team@hqrecovery.com to cancel session</strong>
           </p>
         </div>
       )}
