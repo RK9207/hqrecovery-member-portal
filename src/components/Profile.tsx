@@ -72,15 +72,6 @@ export const Profile: React.FC<ProfileProps> = ({ userData, loading }) => {
           <div className="bg-[#231f1e] rounded-xl p-6 border border-[#3a342f] shadow-lg">
             <div className="flex items-center justify-between mb-6">
               <h1 className="text-2xl font-bold text-white">Profile</h1>
-              <a
-                href="https://link.apisystem.tech/widget/form/XNFVgmm2ApHSi8UisLZQ"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-[#d8ba5b] text-[#231f1e] px-4 py-2 rounded-lg font-semibold hover:bg-[#c9a852] transition-all duration-200 flex items-center space-x-2 transform hover:scale-105"
-              >
-                <Edit3 className="w-4 h-4" />
-                <span>Edit Profile</span>
-              </a>
             </div>
 
             <div className="space-y-4">
