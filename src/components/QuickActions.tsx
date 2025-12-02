@@ -15,16 +15,15 @@ export const QuickActions: React.FC<QuickActionsProps> = ({ userData }) => {
 
   const handleAvailabilityCheck = (e: React.MouseEvent) => {
     const recoveryBalance = userData?.recoveryBalance || 0;
-    const teamBalance = userData?.teamBalance || 0;
     
-    if (recoveryBalance === 0 && teamBalance === 0) {
+    if (recoveryBalance === 0) {
       e.preventDefault();
       setShowTokenError(true);
       setTimeout(() => setShowTokenError(false), 5000); // Hide after 5 seconds
       return;
     }
     
-    // If user has tokens, proceed with normal availability check
+    // If user has recovery tokens, proceed with recovery session availability check
     window.open('https://api.leadconnectorhq.com/widget/booking/wBVwTDYR3QnwAR20GNYC', '_blank');
   };
 
