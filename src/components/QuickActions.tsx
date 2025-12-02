@@ -193,7 +193,8 @@ export const QuickActions: React.FC<QuickActionsProps> = ({ userData }) => {
                   </ul>
                 </div>
                   </ol>
-                <div className="bg-red-900/20 border border-red-700/30 rounded-lg p-4">
+                
+                <div className="bg-red-900/20 border border-red-700/30 rounded-lg p-4 mt-8">
 
                   <h3 className="text-red-300 font-semibold mb-2">⚠️ Important</h3>
                   <p className="text-red-300">
