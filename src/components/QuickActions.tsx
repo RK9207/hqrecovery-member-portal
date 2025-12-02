@@ -194,6 +194,7 @@ export const QuickActions: React.FC<QuickActionsProps> = ({ userData }) => {
                 </div>
                   </ol>
                 <div className="bg-red-900/20 border border-red-700/30 rounded-lg p-4">
+
                   <h3 className="text-red-300 font-semibold mb-2">⚠️ Important</h3>
                   <p className="text-red-300">
                     If your session starts in less than 24 hours, the cancellation link will expire and cancellation will not be possible.
