@@ -28,6 +28,20 @@ export const QuickActions: React.FC<QuickActionsProps> = ({ userData }) => {
     window.open('https://api.leadconnectorhq.com/widget/booking/wBVwTDYR3QnwAR20GNYC', '_blank');
   };
 
+  const handlePrivateSessionAvailability = (e: React.MouseEvent) => {
+    const teamBalance = userData?.teamBalance || 0;
+    
+    if (teamBalance === 0) {
+      e.preventDefault();
+      setShowTokenError(true);
+      setTimeout(() => setShowTokenError(false), 5000); // Hide after 5 seconds
+      return;
+    }
+    
+    // If user has private session tokens, proceed with private session availability check
+    window.open('https://api.leadconnectorhq.com/widget/booking/fLRI2s7taS9cEd0sCgzF', '_blank');
+  };
+
   const handleContactSupport = (e: React.MouseEvent) => {
     e.preventDefault();
     setShowSupportMessage(true);
@@ -55,6 +69,14 @@ export const QuickActions: React.FC<QuickActionsProps> = ({ userData }) => {
       icon: Calendar,
       link: '#',
       onClick: handleAvailabilityCheck,
+      primary: false
+    },
+    {
+      title: 'Check Private Session Availability',
+      description: 'View available private session time slots',
+      icon: Calendar,
+      link: '#',
+      onClick: handlePrivateSessionAvailability,
       primary: false
     },
     {
