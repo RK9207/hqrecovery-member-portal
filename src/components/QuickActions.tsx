@@ -96,8 +96,7 @@ export const QuickActions: React.FC<QuickActionsProps> = ({ userData }) => {
       title: 'Contact Support',
       description: 'Get help from our team',
       icon: Phone,
-      link: '#',
-      onClick: handleContactSupport,
+      link: 'https://link.apisystem.tech/widget/survey/eyJsJkseRgLR5Cl5GHqe',
       primary: false
     }
   ];
