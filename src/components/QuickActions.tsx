@@ -50,7 +50,8 @@ export const QuickActions: React.FC<QuickActionsProps> = ({ userData }) => {
     },
     {
       title: 'Check Session Availability',
-      description: 'View available time slots',
+      title: 'Check Recovery Session Availability',
+      description: 'View available recovery session time slots',
       icon: Calendar,
       link: '#',
       onClick: handleAvailabilityCheck,
